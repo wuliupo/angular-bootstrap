@@ -11,3 +11,19 @@ $('code').each(function(){
 		code.text('<script>\n'+$('#'+target).html().replace(/^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g, '')+'\n</script>');
 	}
 });
+
+var sections=$('.container section,#overview');
+var oneSection=$('#oneSection');
+oneSection.click(function(){
+	if(oneSection.is(":checked")&&location.hash){
+		sections.addClass('hide');
+		$('#'+location.hash.replace('#/','')).removeClass('hide');
+	}else{
+		sections.removeClass('hide');
+	}
+});
+$('.bs-sidenav a, .navbar-nav .dropdown-menu a, .navbar-brand').click(function(){
+	if(!oneSection.is(":checked"))return;
+	sections.addClass('hide');
+	$($(this).attr('href')).removeClass('hide');
+});
